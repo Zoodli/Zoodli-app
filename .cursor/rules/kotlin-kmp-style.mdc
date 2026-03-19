@@ -1,0 +1,24 @@
+---
+description: Kotlin and KMP code quality conventions
+alwaysApply: true
+---
+
+# Kotlin/KMP Style
+
+- Prefer `val` over `var`.
+- Use data classes for immutable models.
+- Keep functions small and focused.
+- Use meaningful names; avoid placeholders like `tmp`, `data1`, `x`.
+- Favor composition over duplication.
+
+## Async and State
+
+- Use coroutines + `Flow/StateFlow` for async and reactive state.
+- Use `suspend` for async operations.
+- Avoid blocking calls on main/UI paths.
+
+## Output Quality
+
+- Generate minimal, extendable code (no boilerplate dumping).
+- Explain reasoning before code for non-trivial changes.
+- Prefer incremental edits over large rewrites.

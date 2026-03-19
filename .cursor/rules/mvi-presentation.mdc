@@ -1,0 +1,25 @@
+---
+description: Enforce MVI structure in presentation layer
+alwaysApply: true
+---
+
+# MVI Presentation Rules
+
+- Each screen has one immutable `State` data class.
+- User and system events are modeled as sealed `Intent` types.
+- UI only:
+  - sends intents
+  - collects/renders state
+- All state updates happen in ViewModel/reducer flow.
+- Avoid direct state mutation in composables (`mutableStateOf` for screen state is discouraged).
+
+## ViewModel Scope
+
+- ViewModel coordinates state + side effects.
+- ViewModel must not contain domain business rules.
+- Business rules move to `domain` engines/use cases and are invoked from ViewModel.
+
+## Flow Guidance
+
+- Prefer `StateFlow` for state exposure.
+- Keep state transitions explicit and testable.

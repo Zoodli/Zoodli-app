@@ -1,0 +1,27 @@
+---
+description: Zodli technology and integration constraints
+alwaysApply: true
+---
+
+# Zodli Stack Constraints
+
+- Networking: `Ktor`
+- Backend + realtime: `Supabase`
+- Local storage: `Room`
+- Dependency injection: `Koin`
+- Navigation: `Voyager`
+- JSON: `kotlinx.serialization`
+- Logging: `Kermit`
+
+## Architecture Application
+
+- Remote access is implemented in `data/remote` (Supabase adapters).
+- Local persistence is implemented in `data/local` (Room adapters).
+- Repositories compose remote/local and expose domain-facing APIs.
+- Presentation does not call Supabase, Room, or Ktor directly.
+
+## Complexity Guardrails
+
+- Do not introduce abstractions without clear need.
+- Do not add patterns “just in case”.
+- Prefer the smallest clean change that preserves scalability.

@@ -1,0 +1,26 @@
+---
+description: Enforce KMP Clean Architecture layer boundaries
+alwaysApply: true
+---
+
+# KMP Clean Architecture Boundaries
+
+- Layer order is strict: `presentation -> domain -> data -> core`.
+- `presentation` never accesses `data` or `core` directly (except UI-only utilities from `core`).
+- `domain` contains business models and engines only; no framework/UI/network/storage code.
+- `data` implements repositories and coordinates remote/local sources.
+- Repository is the single source of truth for data access.
+
+## Dependency Direction
+
+- Allowed:
+  - `presentation -> domain`
+  - `data -> domain`
+  - `data -> core`
+- Not allowed:
+  - `domain -> data` or `domain -> presentation`
+  - `ui/composable -> repository/datasource` direct calls
+
+## Violation Policy
+
+- If a request breaks boundaries, explicitly flag it and propose a compliant alternative.
